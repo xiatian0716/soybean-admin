@@ -1,29 +1,28 @@
 import type { CustomRoute } from '@/interface';
-import { EnumRoutePath, EnumRouteTitle } from '@/enum';
 import { BasicLayout } from '@/layouts';
-import { ROUTE_NAME_MAP, setRouterCacheName } from '@/utils';
+import { setRouterCacheName } from '@/utils';
 import FeatCopy from '@/views/feat/copy/index.vue';
 
-setRouterCacheName(FeatCopy, ROUTE_NAME_MAP.get('feat_copy'));
+setRouterCacheName(FeatCopy, 'feat_copy');
 
 const FEAT: CustomRoute = {
-  name: ROUTE_NAME_MAP.get('feat'),
-  path: EnumRoutePath.feat,
+  name: 'feat',
+  path: '/feat',
   component: BasicLayout,
-  redirect: { name: ROUTE_NAME_MAP.get('feat_copy') },
+  redirect: { name: 'feat_copy' },
   meta: {
     requiresAuth: true,
-    title: EnumRouteTitle.feat,
+    title: '功能示例',
     icon: 'ic:round-repeat'
   },
   children: [
     {
-      name: ROUTE_NAME_MAP.get('feat_copy'),
-      path: EnumRoutePath.feat_copy,
+      name: 'feat_copy',
+      path: '/feat/copy',
       component: FeatCopy,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.feat_copy,
+        title: '剪贴板',
         fullPage: true
       }
     }

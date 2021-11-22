@@ -1,54 +1,53 @@
 import type { CustomRoute } from '@/interface';
-import { EnumRoutePath, EnumRouteTitle } from '@/enum';
 import { BasicLayout } from '@/layouts';
-import { ROUTE_NAME_MAP, setRouterCacheName } from '@/utils';
+import { setRouterCacheName } from '@/utils';
 import DocumentVue from '@/views/document/vue/index.vue';
 import DocumentVite from '@/views/document/vite/index.vue';
 import DocumentNaive from '@/views/document/naive/index.vue';
 
-setRouterCacheName(DocumentVue, ROUTE_NAME_MAP.get('document_vue'));
-setRouterCacheName(DocumentVite, ROUTE_NAME_MAP.get('document_vite'));
-setRouterCacheName(DocumentNaive, ROUTE_NAME_MAP.get('document_naive'));
+setRouterCacheName(DocumentVue, 'document_vue');
+setRouterCacheName(DocumentVite, 'document_vite');
+setRouterCacheName(DocumentNaive, 'document_naive');
 
 const DOCUMENT: CustomRoute = {
-  name: ROUTE_NAME_MAP.get('document'),
-  path: EnumRoutePath.document,
+  name: 'document',
+  path: '/document',
   component: BasicLayout,
-  redirect: { name: ROUTE_NAME_MAP.get('document_vue') },
+  redirect: { name: 'document_vue' },
   meta: {
     requiresAuth: true,
-    title: EnumRouteTitle.document,
+    title: '文档',
     icon: 'carbon:document'
   },
   children: [
     {
-      name: ROUTE_NAME_MAP.get('document_vue'),
-      path: EnumRoutePath.document_vue,
+      name: 'document_vue',
+      path: '/document/vue',
       component: DocumentVue,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.document_vue,
+        title: 'vue文档',
         fullPage: true,
         keepAlive: true
       }
     },
     {
-      name: ROUTE_NAME_MAP.get('document_vite'),
-      path: EnumRoutePath.document_vite,
+      name: 'document_vite',
+      path: '/document/vite',
       component: DocumentVite,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.document_vite,
+        title: 'vite文档',
         fullPage: true
       }
     },
     {
-      name: ROUTE_NAME_MAP.get('document_naive'),
-      path: EnumRoutePath.document_naive,
+      name: 'document_naive',
+      path: '/document/naive',
       component: DocumentNaive,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.document_naive,
+        title: 'naive文档',
         fullPage: true
       }
     }

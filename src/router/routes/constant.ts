@@ -1,8 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { EnumRoutePath, EnumRouteTitle } from '@/enum';
 import { BlankLayout } from '@/layouts';
 import type { LoginModuleType } from '@/interface';
-import { ROUTE_NAME_MAP } from '@/utils';
 import Login from '@/views/system/login/index.vue';
 import NoPermission from '@/views/system/exception/403.vue';
 import NotFound from '@/views/system/exception/404.vue';
@@ -12,20 +10,20 @@ import ServiceError from '@/views/system/exception/500.vue';
  * 固定不变的路由
  * @description !最后一项重定向未找到的路由须放置路由的最后一项
  */
-const constantRoutes: RouteRecordRaw[] = [
+export const constantRoutes: RouteRecordRaw[] = [
   {
     name: 'single_',
     path: '/single_',
     component: BlankLayout,
-    redirect: { name: ROUTE_NAME_MAP.get('not-found') },
+    redirect: { name: 'not-found' },
     meta: {
       keepAlive: true
     },
     children: [
       // 登录
       {
-        name: ROUTE_NAME_MAP.get('login'),
-        path: EnumRoutePath.login,
+        name: 'login',
+        path: '/login',
         component: Login,
         props: route => {
           const moduleType: LoginModuleType = (route.query?.module as LoginModuleType) || 'pwd-login';
@@ -34,37 +32,37 @@ const constantRoutes: RouteRecordRaw[] = [
           };
         },
         meta: {
-          title: EnumRouteTitle.login,
+          title: '登录',
           fullPage: true
         }
       },
       // 403
       {
-        name: ROUTE_NAME_MAP.get('no-permission'),
-        path: EnumRoutePath['no-permission'],
+        name: 'no-permission',
+        path: '/403',
         component: NoPermission,
         meta: {
-          title: EnumRouteTitle['no-permission'],
+          title: '无权限',
           fullPage: true
         }
       },
       // 404
       {
-        name: ROUTE_NAME_MAP.get('not-found'),
-        path: EnumRoutePath['not-found'],
+        name: 'not-found',
+        path: '/404',
         component: NotFound,
         meta: {
-          title: EnumRouteTitle['not-found'],
+          title: '未找到',
           fullPage: true
         }
       },
       // 500
       {
-        name: ROUTE_NAME_MAP.get('service-error'),
-        path: EnumRoutePath['service-error'],
+        name: 'service-error',
+        path: '/500',
         component: ServiceError,
         meta: {
-          title: EnumRouteTitle['service-error'],
+          title: '服务器错误',
           fullPage: true
         }
       }
@@ -77,4 +75,4 @@ const constantRoutes: RouteRecordRaw[] = [
   }
 ];
 
-export default constantRoutes;
+// export default constantRoutes;

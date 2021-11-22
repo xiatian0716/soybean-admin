@@ -1,53 +1,52 @@
 import type { CustomRoute } from '@/interface';
-import { EnumRoutePath, EnumRouteTitle } from '@/enum';
 import { BasicLayout } from '@/layouts';
-import { ROUTE_NAME_MAP, setRouterCacheName } from '@/utils';
+import { setRouterCacheName } from '@/utils';
 import Exception403 from '@/views/system/exception/403.vue';
 import Exception404 from '@/views/system/exception/404.vue';
 import Exception500 from '@/views/system/exception/500.vue';
 
-setRouterCacheName(Exception404, ROUTE_NAME_MAP.get('exception_404'));
-setRouterCacheName(Exception403, ROUTE_NAME_MAP.get('exception_403'));
-setRouterCacheName(Exception500, ROUTE_NAME_MAP.get('exception_500'));
+setRouterCacheName(Exception404, 'exception_404');
+setRouterCacheName(Exception403, 'exception_403');
+setRouterCacheName(Exception500, 'exception_500');
 
 const EXCEPTION: CustomRoute = {
-  name: ROUTE_NAME_MAP.get('exception'),
-  path: EnumRoutePath.exception,
+  name: 'exception',
+  path: '/exception',
   component: BasicLayout,
-  redirect: { name: ROUTE_NAME_MAP.get('exception_403') },
+  redirect: { name: 'exception_403' },
   meta: {
     requiresAuth: true,
-    title: EnumRouteTitle.exception,
+    title: '异常页',
     icon: 'ant-design:exception-outlined'
   },
   children: [
     {
-      name: ROUTE_NAME_MAP.get('exception_403'),
-      path: EnumRoutePath.exception_403,
+      name: 'exception_403',
+      path: '/exception/403',
       component: Exception403,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.exception_403,
+        title: '异常页-403',
         fullPage: true
       }
     },
     {
-      name: ROUTE_NAME_MAP.get('exception_404'),
-      path: EnumRoutePath.exception_404,
+      name: 'exception_404',
+      path: '/exception/404',
       component: Exception404,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.exception_404,
+        title: '异常页-404',
         fullPage: true
       }
     },
     {
-      name: ROUTE_NAME_MAP.get('exception_500'),
-      path: EnumRoutePath.exception_500,
+      name: 'exception_500',
+      path: '/exception/500',
       component: Exception500,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.exception_500,
+        title: '异常页-500',
         fullPage: true
       }
     }

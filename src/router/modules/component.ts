@@ -1,90 +1,89 @@
 import type { CustomRoute } from '@/interface';
-import { EnumRoutePath, EnumRouteTitle } from '@/enum';
 import { BasicLayout, RouterViewLayout } from '@/layouts';
-import { ROUTE_NAME_MAP, setRouterCacheName } from '@/utils';
+import { setRouterCacheName } from '@/utils';
 import ComponentMap from '@/views/component/map/index.vue';
 import ComponentVideo from '@/views/component/video/index.vue';
 import EditorQuill from '@/views/component/editor/quill/index.vue';
 import EditorMarkdown from '@/views/component/editor/markdown/index.vue';
 import ComponentSwiper from '@/views/component/swiper/index.vue';
 
-setRouterCacheName(ComponentMap, ROUTE_NAME_MAP.get('component_map'));
-setRouterCacheName(ComponentVideo, ROUTE_NAME_MAP.get('component_video'));
-setRouterCacheName(EditorQuill, ROUTE_NAME_MAP.get('component_editor_quill'));
-setRouterCacheName(EditorMarkdown, ROUTE_NAME_MAP.get('component_editor_markdown'));
-setRouterCacheName(ComponentSwiper, ROUTE_NAME_MAP.get('component_swiper'));
+setRouterCacheName(ComponentMap, 'component_map');
+setRouterCacheName(ComponentVideo, 'component_video');
+setRouterCacheName(EditorQuill, 'component_editor_quill');
+setRouterCacheName(EditorMarkdown, 'component_editor_markdown');
+setRouterCacheName(ComponentSwiper, 'component_swiper');
 
 const COMPONENT: CustomRoute = {
-  name: ROUTE_NAME_MAP.get('component'),
-  path: EnumRoutePath.component,
+  name: 'component',
+  path: '/component',
   component: BasicLayout,
-  redirect: { name: ROUTE_NAME_MAP.get('component_map') },
+  redirect: { name: 'component_map' },
   meta: {
     requiresAuth: true,
-    title: EnumRouteTitle.component,
+    title: '组件插件',
     icon: 'fluent:app-store-24-regular'
   },
   children: [
     {
-      name: ROUTE_NAME_MAP.get('component_map'),
-      path: EnumRoutePath.component_map,
+      name: 'component_map',
+      path: '/component/map',
       component: ComponentMap,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.component_map,
+        title: '地图插件',
         fullPage: true
       }
     },
     {
-      name: ROUTE_NAME_MAP.get('component_video'),
-      path: EnumRoutePath.component_video,
+      name: 'component_video',
+      path: '/component/video',
       component: ComponentVideo,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.component_video,
+        title: '视频插件',
         fullPage: true
       }
     },
     {
-      name: ROUTE_NAME_MAP.get('component_editor'),
-      path: EnumRoutePath.component_editor,
+      name: 'component_editor',
+      path: '/component/editor',
       component: RouterViewLayout,
-      redirect: { name: ROUTE_NAME_MAP.get('component_editor_quill') },
+      redirect: { name: 'component_editor_quill' },
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.component_editor,
+        title: '编辑器',
         fullPage: true
       },
       children: [
         {
-          name: ROUTE_NAME_MAP.get('component_editor_quill'),
-          path: EnumRoutePath.component_editor_quill,
+          name: 'component_editor_quill',
+          path: '/component/editor/quill',
           component: EditorQuill,
           meta: {
             requiresAuth: true,
-            title: EnumRouteTitle.component_editor_quill,
+            title: '富文本编辑器',
             fullPage: true
           }
         },
         {
-          name: ROUTE_NAME_MAP.get('component_editor_markdown'),
-          path: EnumRoutePath.component_editor_markdown,
+          name: 'component_editor_markdown',
+          path: '/component/editor/markdown',
           component: EditorMarkdown,
           meta: {
             requiresAuth: true,
-            title: EnumRouteTitle.component_editor_markdown,
+            title: 'markdown编辑器',
             fullPage: true
           }
         }
       ]
     },
     {
-      name: ROUTE_NAME_MAP.get('component_swiper'),
-      path: EnumRoutePath.component_swiper,
+      name: 'component_swiper',
+      path: '/component/swiper',
       component: ComponentSwiper,
       meta: {
         requiresAuth: true,
-        title: EnumRouteTitle.component_swiper
+        title: 'Swiper插件'
       }
     }
   ]

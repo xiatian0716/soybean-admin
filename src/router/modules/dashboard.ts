@@ -1,31 +1,30 @@
 import type { CustomRoute } from '@/interface';
-import { EnumRoutePath, EnumRouteTitle } from '@/enum';
 import { BasicLayout } from '@/layouts';
-import { ROUTE_NAME_MAP, setRouterCacheName } from '@/utils';
+import { setRouterCacheName } from '@/utils';
 import { ROUTE_HOME } from '../routes';
 import DashboardWorkbench from '@/views/dashboard/workbench/index.vue';
 
-setRouterCacheName(DashboardWorkbench, ROUTE_NAME_MAP.get('dashboard_workbench'));
+setRouterCacheName(DashboardWorkbench, 'dashboard_workbench');
 
 const DASHBOARD: CustomRoute = {
-  name: ROUTE_NAME_MAP.get('dashboard'),
-  path: EnumRoutePath.dashboard,
+  name: 'dashboard',
+  path: '/dashboard',
   component: BasicLayout,
-  redirect: { name: ROUTE_NAME_MAP.get('dashboard_analysis') },
+  redirect: { name: 'dashboard_analysis' },
   meta: {
-    title: EnumRouteTitle.dashboard,
+    title: '仪表盘',
     icon: 'carbon:dashboard'
   },
   children: [
     ROUTE_HOME,
     {
-      name: ROUTE_NAME_MAP.get('dashboard_workbench'),
-      path: EnumRoutePath.dashboard_workbench,
+      name: 'dashboard_workbench',
+      path: '/dashboard/workbench',
       component: DashboardWorkbench,
       meta: {
         keepAlive: true,
         requiresAuth: true,
-        title: EnumRouteTitle.dashboard_workbench
+        title: '工作台'
       }
     }
   ]
