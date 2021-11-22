@@ -1,6 +1,5 @@
 import { useRouter, useRoute } from 'vue-router';
 import type { RouteLocationRaw } from 'vue-router';
-import { EnumRoutePath } from '@/enum';
 import { router as globalRouter } from '@/router';
 import type { LoginModuleType } from '@/interface';
 
@@ -8,7 +7,7 @@ import type { LoginModuleType } from '@/interface';
  * 重定向地址
  * - current: 取当前的path作为重定向地址
  */
-type LoginRedirect = 'current' | EnumRoutePath;
+type LoginRedirect = 'current' | string;
 
 /**
  * 路由跳转
@@ -30,13 +29,13 @@ export default function useRouterChange(inSetup: boolean = true) {
    */
   function toLogin(module: LoginModuleType = 'pwd-login', redirectUrl: LoginRedirect = 'current') {
     const routeLocation: RouteLocationRaw = {
-      path: EnumRoutePath.login,
+      path: '/login',
       query: { module }
     };
     if (redirectUrl) {
       let url = redirectUrl;
       if (redirectUrl === 'current') {
-        url = router.currentRoute.value.fullPath as EnumRoutePath;
+        url = router.currentRoute.value.fullPath as string;
       }
       routeLocation.query!.redirectUrl = url;
     }
@@ -51,12 +50,12 @@ export default function useRouterChange(inSetup: boolean = true) {
   function toCurrentLogin(module: LoginModuleType) {
     if (route) {
       const { query } = route;
-      router.push({ path: EnumRoutePath.login, query: { ...query, module } });
+      router.push({ path: '/login', query: { ...query, module } });
     }
   }
 
   /** 登录后跳转重定向的地址 */
-  function toLoginRedirectUrl(path: EnumRoutePath) {
+  function toLoginRedirectUrl(path: string) {
     router.push(path);
   }
 

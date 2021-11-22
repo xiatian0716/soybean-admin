@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { MenuOption } from 'naive-ui';
-import { EnumRoutePath, EnumLoginModule } from '@/enum';
+import { EnumLoginModule } from '@/enum';
 
 /** 路由描述 */
 interface RouteMeta {
@@ -20,9 +20,6 @@ interface RouteMeta {
 
 /** 路由配置 */
 export type CustomRoute = RouteRecordRaw & { meta: RouteMeta };
-
-/** 路由路径 */
-export type RoutePathKey = keyof typeof EnumRoutePath;
 
 /** 菜单项配置 */
 export type GlobalMenuOption = MenuOption & {
