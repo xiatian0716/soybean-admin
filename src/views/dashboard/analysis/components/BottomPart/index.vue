@@ -20,9 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { h } from 'vue';
+import { h, ref } from 'vue';
 import { NGrid, NGridItem, NCard, NTimeline, NTimelineItem, NDataTable, NTag } from 'naive-ui';
 
+const columns = undefined;
 interface TimelineData {
   type: 'default' | 'info' | 'success' | 'warning' | 'error';
   title: string;
@@ -46,7 +47,7 @@ const timelines: TimelineData[] = [
   { type: 'info', title: '信息', content: '是的', time: '2021-10-10 20:46' }
 ];
 
-const columns = [
+const columnsdata = [
   {
     title: 'Name',
     key: 'name'

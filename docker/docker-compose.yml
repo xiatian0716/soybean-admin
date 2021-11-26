@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  cratelis_front:
+    container_name: cratelis_vue #配置容器名
+    build:
+      context: .
+      dockerfile: Dockerfile #指定dockerFile文件
+    image: cratelis/vue:0.0.1 # 指定镜像名
+    ports:
+      - "8021:80" # 暴露端口
+    volumes:
+      - /logs:/logs # 创建容器数据卷

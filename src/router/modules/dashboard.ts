@@ -16,17 +16,17 @@ const DASHBOARD: CustomRoute = {
     icon: 'carbon:dashboard'
   },
   children: [
-    ROUTE_HOME,
-    {
-      name: 'dashboard_workbench',
-      path: '/dashboard/workbench',
-      component: DashboardWorkbench,
-      meta: {
-        keepAlive: true,
-        requiresAuth: true,
-        title: '工作台'
-      }
-    }
+    ROUTE_HOME
+    // {
+    //   name: 'dashboard_workbench',
+    //   path: '/dashboard/workbench',
+    //   component: DashboardWorkbench,
+    //   meta: {
+    //     keepAlive: true,
+    //     requiresAuth: true,
+    //     title: '工作台'
+    //   }
+    // }
   ]
 };
 

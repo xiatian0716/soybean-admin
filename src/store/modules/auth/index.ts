@@ -19,7 +19,7 @@ const authStore = defineStore({
       token: '',
       userInfo: {
         userId: '',
-        userName: 'Soybean',
+        userName: 'Sunshine',
         userPhone: ''
       }
     };

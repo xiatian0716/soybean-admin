@@ -2,7 +2,7 @@
   <n-dropdown :options="options" @select="handleDropdown">
     <hover-container class="px-12px">
       <img :src="avatar" class="w-32px h-32px" />
-      <span class="pl-8px text-16px font-medium">Soybean</span>
+      <span class="pl-8px text-16px font-medium">Sunshine</span>
     </hover-container>
   </n-dropdown>
 </template>

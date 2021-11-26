@@ -1,8 +1,8 @@
 <div align="center">
   <a href="https://github.com/honghuangdc/soybean-admin">
-    <img alt="SoybeanAdmin Logo" width="200" height="200" src="https://s3.bmp.ovh/imgs/2021/09/088571214c76b1e5.png">
+    <img alt="AdminMnager Logo" width="200" height="200" src="https://s3.bmp.ovh/imgs/2021/09/088571214c76b1e5.png">
   </a><br /><br />
-	<h1>Soybean Admin</h1>
+	<h1>AdminMnager</h1>
   <br />
 </div>
 
@@ -12,7 +12,7 @@
 
 ## 简介
 
-Soybean Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的插件，有着极高的代码规范，开箱即用的中后台前端解决方案，也可用于学习参考。
+AdminMnager 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的插件，有着极高的代码规范，开箱即用的中后台前端解决方案，也可用于学习参考。
 
 ## 特性
 
@@ -28,15 +28,15 @@ Soybean Admin 是一个基于 Vue3、Vite、Naive UI、TypeScript 的免费中�
 
 <p align="center">
 
-​    <img alt="SoybeanAdmin" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/02.png">
+​    <img alt="AdminMnager" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/02.png">
 
-​    <img alt="SoybeanAdmin" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/03.png">
+​    <img alt="AdminMnager" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/03.png">
 
-​    <img alt="SoybeanAdmin" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/01.png">
+​    <img alt="AdminMnager" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/01.png">
 
-<img alt="SoybeanAdmin" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/04.png">
+<img alt="AdminMnager" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/04.png">
 
-<img alt="SoybeanAdmin" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/05.png">
+<img alt="AdminMnager" width="100%" src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/05.png">
 
 </p>
 
@@ -107,7 +107,7 @@ pnpm i -g commitizen
 
 ## 交流
 
-`Soybean Admin` 是完全开源免费的项目，在帮助开发者更方便地进行中大型管理系统开发，同时也提供 QQ 交流群使用问题欢迎在群内提问。
+`AdminMnager` 是完全开源免费的项目，在帮助开发者更方便地进行中大型管理系统开发，同时也提供 QQ 交流群使用问题欢迎在群内提问。
 
 - QQ 群 `711301266`
 
@@ -115,7 +115,7 @@ pnpm i -g commitizen
     <img src="https://raw.githubusercontent.com/honghuangdc/project-assets/main/img/qq_qrcode.JPG" style="width:200px" />
   </div>
 
-  
+
 
 - 本人微信号：honghuangdc，欢迎来技术交流。
 
