@@ -41,14 +41,7 @@
           </el-table-column>
         </el-table>
         <div class="flex flex-row-reverse">
-          <el-pagination
-            background
-            small
-            layout="prev, pager, next"
-            :total="pager.total"
-            :page-size="pager.pageSize"
-            @current-change="handleCurrentChange"
-          />
+          <n-pagination v-model:page="pager.pageNum" :page-count="pager.total" @click="handlePage" />
         </div>
       </div>
 
@@ -76,32 +69,35 @@
 </template>
 <script setup>
 import { getCurrentInstance, onMounted, reactive, ref, toRaw } from 'vue';
-import { NCard, useMessage } from 'naive-ui';
+import { NCard, NPagination, useMessage } from 'naive-ui';
 import { ElForm, ElFormItem, ElInput, ElButton, ElTable, ElTableColumn, ElPagination, ElDialog } from 'element-plus';
 import axios from 'axios';
 import { columnsdata } from './columnsdata';
 // 初始化用户列表数据
 import { userdata } from './userdata';
-
+import { formateDate } from './utils';
 // =========================================================
 //                        公共数据和方法
 // =========================================================
 //   获取Composition API 上下文对象
 const { ctx } = getCurrentInstance();
+
 const message = useMessage();
-// 初始化用户列表数据
+// 初始化证书列表数据
 const certiList = ref([...userdata]);
-// 初始化用户表单对象
+// 初始化证书表单对象
 const certi = reactive({
-  isDeleted: false
+  isDeleted: false,
+  OperatorName: '',
+  SocialCreditCode: ''
 });
 // 初始化分页对象
 const pager = reactive({
   pageNum: 1,
-  pageSize: 10,
-  total: 50
+  pageSize: 10
 });
-// 获取用户列表
+
+// 获取证书列表
 const getCertiList = async () => {
   const param = { ...certi, ...pager };
   try {
@@ -114,10 +110,8 @@ const getCertiList = async () => {
       }
     })
       .then(response => {
-        console.log(response.data);
-        const total = parseInt(response.data.PageCount / response.data.PageSize, 10);
-        pager.total = total + 1;
-        pager.pageSize = response.data.PageSize;
+        pager.total = parseInt(response.data.PageCount / response.data.PageSize, 10) + 1;
+        // pager.pageSize = response.data.PageSize; // 不需要设置
         certiList.value = response.data.List;
       })
       .catch(e => {
@@ -143,6 +137,8 @@ const userForm = reactive({
 // =========================================================
 //  查询事件，获取用户列表
 const handleQuery = () => {
+  console.log(certi);
+  // getInfoRequestList
   getCertiList();
 };
 // 重置查询表单
@@ -169,11 +165,21 @@ const handleSelectionChange = list => {
 };
 // 用户单个删除
 const handleDel = async row => {
-  await ctx.$api.userDel({
-    userIds: [row.userId] // 可单个删除，也可批量删除
-  });
-  ctx.$message.success('删除成功');
-  getCertiList();
+  axios({
+    url: '/api/delCertiInfoBysocialCreditCodes',
+    method: 'POST',
+    data: [row.SocialCreditCode],
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      message.success('删除成功');
+      getCertiList();
+    })
+    .catch(e => {
+      message.error('删除失败');
+    });
 };
 // 批量删除
 const handlePatchDel = async () => {
@@ -207,7 +213,7 @@ const handleDownLoad = async row => {
     ScopeOfApplication: '中国（云南）自由贸易试验区昆明片区',
     LicenseItems: `${row.LicenseItems}`,
     IssuingAuthority: '中国（云南）自由贸易试验区昆明片区行政审批局',
-    DateOfCertification: `${row.DateOfCertification}`,
+    DateOfCertification: formateDate(`${row.DateOfCertification}`),
     PermitNumber: `${row.PermitNumber}`,
     SocialCreditCode: `${row.SocialCreditCode}`
   };
@@ -236,8 +242,14 @@ const handleDownLoad = async row => {
 };
 
 // 分页事件处理
-const handleCurrentChange = current => {
-  pager.pageNum = current;
+// const handleCurrentChange = current => {
+//   pager.pageNum = current;
+//   getCertiList();
+// };
+
+const handlePage = page => {
+  // console.log(pager.pageNum);
+  // console.log(page);
   getCertiList();
 };
 

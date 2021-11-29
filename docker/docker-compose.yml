@@ -11,3 +11,4 @@ services:
       - "8021:80" # 暴露端口
     volumes:
       - /logs:/logs # 创建容器数据卷
+    restart: always

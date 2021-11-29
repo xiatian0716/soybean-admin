@@ -34,15 +34,17 @@
         </n-form-item-gi>
         <!--				action="http://localhost:8080/api/saveCertiFiles/11223344qwe"-->
         <n-form-item-gi :span="12">
-          <n-upload
+          <el-upload
             ref="upload"
+            :file-list="theFileList"
+            class="upload-demo"
             :action="`/api/saveCertiFiles/${dataNeed.SocialCreditCode}`"
-            :default-upload="false"
-            multiple
-            @change="handleChange"
+            :auto-upload="false"
+            :multiple="true"
+            :on-change="handleChange"
           >
-            <n-button>选择文件</n-button>
-          </n-upload>
+            <el-button size="small" type="primary">选择文件</el-button>
+          </el-upload>
         </n-form-item-gi>
         <n-gi :span="24">
           <div style="display: flex; justify-content: center; align-items: center; height: 120px">
@@ -55,15 +57,16 @@
       </n-grid>
     </n-form>
   </n-card>
-  <pre>
-      {{ JSON.stringify(dataNeed, 0, 2) }}
-      </pre
-  >
+  <!--  <pre>-->
+  <!--        {{ JSON.stringify(dataNeed, 0, 2) }}-->
+  <!--        </pre-->
+  <!--  >-->
 </template>
 
 <script setup>
 import { ref, reactive, getCurrentInstance } from 'vue';
 import { NCard, NForm, NGrid, NInput, NGi, NButton, NFormItemGi, NDatePicker, NUpload, useMessage } from 'naive-ui';
+import { ElUpload, ElButton } from 'element-plus';
 import axios from 'axios';
 
 // 获取Composition API 上下文对象
@@ -111,7 +114,21 @@ const rules = ref({
   }
 });
 const size = ref('small');
-const dataNeed = reactive({
+
+// 文件列表
+const theFileList = ref([]);
+
+// 表单列表
+const defaultValueRef = () => ({
+  OperatorName: null,
+  LegalRepresentative: null,
+  DateOfCertification: null,
+  PermitNumber: null,
+  SocialCreditCode: null,
+  IndustryCategory: null,
+  LicenseItems: null
+});
+let dataNeed = reactive({
   OperatorName: null,
   LegalRepresentative: null,
   DateOfCertification: null,
@@ -123,11 +140,12 @@ const dataNeed = reactive({
 
 // 清空reactive对象
 const clear = () => {
-  Object.keys(dataNeed).map(key => {
-    // delete dataNeed[key];
-    dataNeed[key] = null;
-    return null;
-  });
+  formRef.value.restoreValidation();
+  // 对象响应式清空
+  dataNeed = Object.assign(dataNeed, defaultValueRef());
+  // element-ui upload文件上传之后怎么清空
+  // ctx.$refs.upload.clearFiles(); // 失效
+  theFileList.value = [];
 };
 
 // 获取data对象传到后台
@@ -145,17 +163,17 @@ const getData = () => {
 // const socialCreditCode = dataNeed.SocialCreditCode.;
 // const actionUrl = `http://localhost:8080/api/saveCertiFiles/${dataNeed.SocialCreditCode}`;
 const upload = ref(null);
-const allImag = ref(false);
-const handleChange = ({ fileList }) => {
+const allImag = ref(true);
+const handleChange = (file, fileList) => {
+  theFileList.value = [...fileList];
+  allImag.value = true; // 首先默认都是图片文件
   const imgStr = /\.(jpg|jpeg|png|bmp|BMP|JPG|PNG|JPEG)$/;
   if (fileList) {
     fileList.forEach(item => {
       if (!imgStr.test(item.name)) {
         message.error('请上传图片文件');
-        return false;
+        allImag.value = false; // 出现非图片判假
       }
-      allImag.value = true;
-      return true;
     });
   }
 };
@@ -168,7 +186,9 @@ const handleValidateButtonClick = dataNeed => {
         message.error('请上传图片文件');
         throw new Error('请上传图片文件');
       } else {
-        upload.value.submit();
+        // upload.value.submit();
+        ctx.$refs.upload.submit();
+        ctx.$refs.upload.clearFiles();
       }
       // 提交Ajax请求
       const postdata = getData();
@@ -185,6 +205,7 @@ const handleValidateButtonClick = dataNeed => {
           clear();
         })
         .catch(e => {
+          console.log(e);
           message.error('数据提交失败');
         });
     } else {

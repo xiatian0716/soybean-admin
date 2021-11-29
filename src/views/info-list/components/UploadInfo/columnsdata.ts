@@ -1,3 +1,5 @@
+import { formateDate } from './utils';
+
 // 定义动态表格-格式
 export const columnsdata = [
   {
@@ -13,7 +15,11 @@ export const columnsdata = [
   {
     label: '制证日期',
     prop: 'DateOfCertification',
-    width: '120'
+    width: '120',
+    // new Date(shijianchuo)
+    formatter: (row: any, column: any, cellValue: any) => {
+      return formateDate(cellValue);
+    }
   },
   {
     label: '许可证编号',
@@ -35,21 +41,4 @@ export const columnsdata = [
     prop: 'LicenseItems',
     width: '120'
   }
-
-  // {
-  //   label: '注册时间',
-  //   prop: 'createTime',
-  //   width: 180,
-  //   formatter: (row, column, value) => {
-  //     return utils.formateDate(new Date(value));
-  //   }
-  // },
-  // {
-  //   label: '最后登录时间',
-  //   prop: 'lastLoginTime',
-  //   width: 180,
-  //   formatter: (row, column, value) => {
-  //     return utils.formateDate(new Date(value));
-  //   }
-  // }
 ];
