@@ -202,7 +202,7 @@ const handleDownLoad = async row => {
   const certiInfo = {
     URL: `http://lvtese.com/certinfomation?id=${row.SocialCreditCode}`,
     // http://lvtese.com/certinfomation?id=92530111MA6KHMHY55
-    box_size: 20,
+    box_size: 15,
     border: 1,
     frontsize: 110,
     OperatorName: `${row.OperatorName}`,
